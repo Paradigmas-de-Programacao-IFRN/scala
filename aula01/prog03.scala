@@ -6,9 +6,14 @@ case class Musica (nome: String, ano: Int, artista: String, duração: Double):
 
 case class PlayList(titulo: String, musicas: List[Musica] = List()):
   def inserir(musica: Musica): PlayList = this.copy(musicas = musica :: musicas)
+
   def remover(musica: Musica): PlayList = this.copy(musicas = musicas.diff(List(musica)))
+  
   def ordenar(criterio: (Musica, Musica) => Boolean) = musicas.sortWith(criterio)
-  def tempoTotal = musicas.map(m => m.duração).foldRight(0.0)((a, b) => a + b)
+  
+  def tempoTotal = musicas
+                     .map(m => m.duração)
+                     .foldRight(0.0)((a, b) => a + b)
 
 @main def main() =
   val m1 = Musica("Let it be", 1970, "The Beatles", 3.14)
