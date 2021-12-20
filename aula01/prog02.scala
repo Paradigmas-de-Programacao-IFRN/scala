@@ -4,9 +4,14 @@ import io.StdIn.readLine
   val numeros = readLine().split(" ").map(_.toInt)
 
   val a = numeros.sorted.drop(1).dropRight(1)
-  println(a.mkString(", "))
+  println(a.mkString("[", ", ", "]"))
 
-  val b = numeros.foldRight(0)((x, y) => x + y)
+
+// [ 5, -2, 103]
+  val b = numeros
+           .filter(n => n >= 0 && n <= 100)
+           .foldRight(0)((x, y) => x + y)  // [21]
+
   println(s"Soma = ${b}")
 
   val c = numeros.filter(x => x % 2 == 0).length

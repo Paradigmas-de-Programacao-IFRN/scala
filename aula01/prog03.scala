@@ -5,7 +5,7 @@ case class Musica (nome: String, ano: Int, artista: String, duração: Double):
     s"${nome}\t${ano}\t${artista}\t${duração.formatted("%.2f")}"
 
 case class PlayList(titulo: String, musicas: List[Musica] = List()):
-  def inserir(musica: Musica): PlayList = this.copy(musicas = musica :: musicas)
+  def inserir(musica: Musica): PlayList = PlayList(titulo, musica::musicas)
 
   def remover(musica: Musica): PlayList = this.copy(musicas = musicas.diff(List(musica)))
   
@@ -23,9 +23,12 @@ case class PlayList(titulo: String, musicas: List[Musica] = List()):
              .inserir(m2)
 
   println("Musicas ordenadas por ano: ")
-  println(p1.ordenar((a,b) => a.ano < b.ano).mkString("\n"))
+  println(p1.ordenar((a,b) => a.ano <= b.ano).mkString("\n"))
   println("Musicas em ordem alfabética: ")
-  println(p1.ordenar((a,b) => a.nome < b.nome).mkString("\n"))
+  println(p1.ordenar((a,b) => a.nome <= b.nome).mkString("\n"))
 
   val p2 = p1.remover(m2)
   println(s"Musicas:\n${p2}")
+
+  println(p1.tempoTotal)
+
