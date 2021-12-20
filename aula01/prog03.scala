@@ -9,7 +9,7 @@ case class PlayList(titulo: String, musicas: List[Musica] = List()):
 
   def remover(musica: Musica): PlayList = this.copy(musicas = musicas.diff(List(musica)))
   
-  def ordenar(criterio: (Musica, Musica) => Boolean) = musicas.sortWith(criterio)
+  def ordenar(criterio: (Musica, Musica) => Boolean): List[Musica] = musicas.sortWith(criterio)
   
   def tempoTotal = musicas
                      .map(m => m.duração)
